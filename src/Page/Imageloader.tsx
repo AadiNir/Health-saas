@@ -1,9 +1,9 @@
 import InsightViewer, { useImage, useDicomFile, useInteraction } from "@lunit/insight-viewer";
 import { useViewport } from "@lunit/insight-viewer/viewport";
-import Canva from "./Canva";
-import { useEffect, useRef, useState } from "react";
-import { FaUpload, FaArrowsAlt, FaAdjust, FaRedo } from "react-icons/fa";
-import AlertBox from "./ui/Alertbox";
+import Canva from "../components/Canva";
+import {  useRef, useState } from "react";
+import {  FaArrowsAlt, FaAdjust, FaRedo } from "react-icons/fa";
+import AlertBox from "../components/Alertbox";
 type Controllers = {
   pan: () => void;
   reset: () => void;

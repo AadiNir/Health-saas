@@ -33,7 +33,7 @@ export default function LandingPage() {
       {/* Main Content */}
       <main className="flex-1">
         {/* Hero Section */}
-        <section className={`py-12 md:py-24 lg:py-32 xl:py-36 border-b-2 border-gray-950  ${!isDarkMode?"bg-gradient-to-r from-gray-300 to-stone-100":""}`}>
+        <section className={`py-12 md:py-24 lg:py-32 xl:py-36 border-b-2  ${!isDarkMode?"bg-gradient-to-r from-gray-300 to-stone-100":""}`}>
           <Container>
             <div className="text-center ">
               <div className=" text-6xl font-bold tracking-tight mb-4">

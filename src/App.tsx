@@ -1,9 +1,8 @@
 
 import './App.css';
-import Imageloader from './components/Imageloader';
+import Imageloader from './Page/Imageloader';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Canva from './components/Canva'
-import HomePage from './components/HomePage';
+import HomePage from './Page/HomePage';
 
 function App() {
   return (
