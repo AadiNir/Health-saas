@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button, IconButton, Typography, Container, Grid, Paper, AppBar, Toolbar, Link } from "@mui/material";
 import { Crop, Move, Sliders, Ruler, ArrowRight, CheckCircle, Sun, Moon } from "lucide-react";
-
 export default function LandingPage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
+    (isDarkMode)?localStorage.setItem("theme","light"):localStorage.setItem("theme","dark"); 
   };
 
   const themeClasses = isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900";
@@ -14,7 +14,7 @@ export default function LandingPage() {
   return (
     <div className={`flex flex-col min-h-screen ${themeClasses}`}>
       {/* Header */}
-      <AppBar position="static" color="transparent" elevation={0} className="border-b">
+      <AppBar position="static" color="transparent" elevation={0} className={`border ${!isDarkMode?"border-slate-950":"border-gray-50"} rounded-xl w-min `}>
         <Toolbar>
           <Link href="#" underline="none" className="flex items-center">
             <Crop className="h-6 w-6 text-primary" />
@@ -23,15 +23,6 @@ export default function LandingPage() {
             </Typography>
           </Link>
           <div className="ml-auto flex gap-4">
-            <Link href="#features" color="inherit" underline="hover">
-              Features
-            </Link>
-            <Link href="#testimonials" color="inherit" underline="hover">
-              Testimonials
-            </Link>
-            <Link href="#pricing" color="inherit" underline="hover">
-              Pricing
-            </Link>
             <IconButton onClick={toggleTheme} color="inherit">
               {isDarkMode ? <Sun /> : <Moon />}
             </IconButton>
@@ -42,27 +33,32 @@ export default function LandingPage() {
       {/* Main Content */}
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 md:py-24 lg:py-32 xl:py-48">
+        <section className={`py-12 md:py-24 lg:py-32 xl:py-36 border-b-2 border-gray-950  ${!isDarkMode?"bg-gradient-to-r from-gray-300 to-stone-100":""}`}>
           <Container>
-            <div className="text-center">
-              <Typography variant="h3" className="font-bold tracking-tight mb-4">
+            <div className="text-center ">
+              <div className=" text-6xl font-bold tracking-tight mb-4">
                 Transform Medical Imaging with MediMorph
-              </Typography>
-              <Typography variant="subtitle1" className="mb-6">
+              </div>
+              <div  className="text-3xl mb-6 py-5">
                 Powerful image manipulation and unit conversion for healthcare professionals.
                 Enhance diagnostics and streamline your workflow.
-              </Typography>
+              </div>
              
+            </div>
+            <div className="flex justify-center items-center py-11 ">
+                <div className="flex border px-4 py-2 rounded-lg bg-white hover:bg-zinc-200">
+                    <Link href="imageconfig" underline="none" className={` ${(isDarkMode)?"text-slate-300":"text-slate-800"}`}>Start Now</Link>
+                </div>
             </div>
           </Container>
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-12 md:py-24 lg:py-32">
+        <section id="features" className="py-12 md:py-24 lg:py-20">
           <Container>
             <Typography
               variant="h4"
-              className="font-bold tracking-tight text-center mb-12"
+              className="font-bold tracking-tight text-center mb-12 py-12"
             >
               Powerful Features for Medical Imaging
             </Typography>
@@ -90,12 +86,12 @@ export default function LandingPage() {
                 },
                 {
                   icon: <CheckCircle />,
-                  title: "3D Reconstruction",
+                  title: "3D Reconstruction (Future Scope)",
                   description: "Create detailed 3D models from 2D scans, providing a comprehensive view of anatomical structures.",
                 },
                 {
                   icon: <CheckCircle />,
-                  title: "AI-Assisted Analysis",
+                  title: "AI-Assisted Analysis (Future Scope)",
                   description: "Leverage machine learning algorithms to detect anomalies and assist in preliminary diagnoses.",
                 },
               ].map((feature, index) => (
