@@ -47,7 +47,7 @@ export default function LandingPage() {
             </div>
             <div className="flex justify-center items-center py-11 ">
                 <div className={`flex border px-4 py-2 rounded-lg hover:bg-zinc-200  ${(isDarkMode)?"bg-white":"bg-black"}`}>
-                    <Link href="imageconfig" underline="none" color={` ${(isDarkMode)?"black":"white"}`} >Start Now</Link>
+                    <Link href="imageconfig" underline="none" color={` ${(isDarkMode)?"black":"whitec"}`} >Start Now</Link>
                 </div>
             </div>
           </Container>
