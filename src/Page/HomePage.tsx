@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button, IconButton, Typography, Container, Grid, Paper, AppBar, Toolbar, Link } from "@mui/material";
-import { Crop, Move, Sliders, Ruler, ArrowRight, CheckCircle, Sun, Moon } from "lucide-react";
+import {  IconButton, Typography, Container, Grid, Paper, AppBar, Toolbar, Link } from "@mui/material";
+import { Crop, Move, Sliders, Ruler, CheckCircle, Sun, Moon } from "lucide-react";
 export default function LandingPage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -46,7 +46,7 @@ export default function LandingPage() {
              
             </div>
             <div className="flex justify-center items-center py-11 ">
-                <div className="flex border px-4 py-2 rounded-lg bg-white hover:bg-zinc-200">
+                <div className={`flex border px-4 py-2 rounded-lg hover:bg-zinc-200  ${(isDarkMode)?"bg-black":"bg-white"}`}>
                     <Link href="imageconfig" underline="none" className={` ${(isDarkMode)?"text-slate-300":"text-slate-800"}`}>Start Now</Link>
                 </div>
             </div>
