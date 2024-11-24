@@ -1,9 +1,12 @@
 import InsightViewer, { useImage, useDicomFile, useInteraction } from "@lunit/insight-viewer";
 import { useViewport } from "@lunit/insight-viewer/viewport";
 import Canva from "../components/Canva";
-import {  useRef, useState } from "react";
-import {  FaArrowsAlt, FaAdjust, FaRedo } from "react-icons/fa";
+import { useRef, useState } from "react";
+import { FaArrowsAlt, FaAdjust, FaRedo } from "react-icons/fa";
 import AlertBox from "../components/Alertbox";
+
+const MOCK_IMAGE = "wadouri:https://static.lunit.io/fixtures/dcm-files/series/CT000002.dcm"; // Default mock image URL
+
 type Controllers = {
   pan: () => void;
   reset: () => void;
@@ -11,13 +14,12 @@ type Controllers = {
 };
 
 export default function Imageloader() {
-  const [darkMode, setDarkMode] = useState(localStorage.getItem("theme")=="light"?false:true);
-  console.log(localStorage.getItem("theme"));
+  const [darkMode, setDarkMode] = useState(localStorage.getItem("theme") === "light" ? false : true);
   const { imageId, file, setImageIdByFile } = useDicomFile();
-  const [showAlert, setShowAlert] = useState(true); 
-  const { image } = useImage({ dicomfile: imageId });
+  const [showAlert, setShowAlert] = useState(true);
+  const { image } = useImage({ dicomfile: imageId || MOCK_IMAGE }); // Use mock image if no file is uploaded
   const viewerRef = useRef<HTMLDivElement | null>(null);
-    
+
   const { interaction, setInteraction } = useInteraction({
     mouseWheel: "scale",
     primaryDrag: "pan",
@@ -46,7 +48,7 @@ export default function Imageloader() {
 
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center p-8 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"}`}>
-            <AlertBox isVisible={showAlert} onClose={() => setShowAlert(false)} />
+      <AlertBox isVisible={showAlert} onClose={() => setShowAlert(false)} />
 
       {/* Header */}
       <div className="flex justify-between items-center mb-8 w-full max-w-4xl">
@@ -110,7 +112,7 @@ export default function Imageloader() {
         </div>
 
         {/* Canva Component */}
-        <Canva file={imageId} theme={darkMode ? "dark" : "light"} />
+        <Canva file={imageId || MOCK_IMAGE} theme={darkMode ? "dark" : "light"} />
       </div>
     </div>
   );

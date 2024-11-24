@@ -14,6 +14,7 @@ const AlertBox: React.FC<AlertBoxProps> = ({ isVisible, onClose }) => {
         <h2 className="text-xl font-bold text-gray-800">Important Instructions</h2>
         <p className="mt-2 text-gray-600">
           Please use two fingers upwards and downwards for zooming in and out for the image manipulation tool. 
+          The above picture is a default image from Internet please upload your own files
           <br />
           Note: This tool only supports DICOM images.
         </p>
