@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' Component={HomePage}/>
-      <Route path='/imagesize' Component={Canva}/>
+      {/* <Route path='/imagesize' Component={Canva}/> */}
       <Route path="/imageconfig" Component={Imageloader}/>
     </Routes>
     </BrowserRouter>

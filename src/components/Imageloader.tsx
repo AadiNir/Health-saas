@@ -1,6 +1,6 @@
 import InsightViewer, { useImage, useDicomFile, useInteraction } from "@lunit/insight-viewer";
-import { useViewport } from '@lunit/insight-viewer/viewport';
-
+import { useViewport } from "@lunit/insight-viewer/viewport";
+import Canva from "./Canva";
 import { useRef, useState } from "react";
 
 type Controllers = {
@@ -10,21 +10,23 @@ type Controllers = {
 };
 
 export default function Imageloader() {
+  const [darkMode, setDarkMode] = useState(false);
+
   const { imageId, file, setImageIdByFile } = useDicomFile();
   const { image } = useImage({ dicomfile: imageId });
   const viewerRef = useRef<HTMLDivElement | null>(null);
 
   const { interaction, setInteraction } = useInteraction({
-    mouseWheel: 'scale',
-    primaryDrag: 'pan',
+    mouseWheel: "scale",
+    primaryDrag: "pan",
   });
 
   const { viewport, setViewport, resetViewport } = useViewport({ image, viewerRef });
 
   const controllers: Controllers = {
-    pan: () => setInteraction((prev) => ({ ...prev, primaryDrag: 'pan' })),
+    pan: () => setInteraction((prev) => ({ ...prev, primaryDrag: "pan" })),
     reset: resetViewport,
-    adjust: () => setInteraction((prev) => ({ ...prev, primaryDrag: 'adjust' })),
+    adjust: () => setInteraction((prev) => ({ ...prev, primaryDrag: "adjust" })),
   };
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -41,54 +43,72 @@ export default function Imageloader() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
-      <div className="bg-white shadow-md rounded-lg p-4 w-full max-w-3xl">
+    <div className={`min-h-screen p-6 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"}`}>
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">DICOM Image Loader</h1>
+        <button
+          onClick={() => setDarkMode((prev) => !prev)}
+          className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700">
+          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className={` shadow-lg rounded-lg p-6 w-full max-w-4xl ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white"}`}>
         {/* File Upload */}
-        <div className="flex items-center justify-between mb-6">
-          <label className="block text-lg font-medium text-gray-700">
-            Load DICOM File:
-          </label>
+        <div className="flex items-center justify-between mb-4 ">
+          <label className="block text-lg font-medium">Load DICOM File:</label>
           <input
             type="file"
             accept="application/dicom"
             onChange={handleChange}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                       file:rounded-full file:border-0
-                       file:text-sm file:font-semibold
-                       file:bg-indigo-50 file:text-indigo-700
-                       hover:file:bg-indigo-100"
+            className={`block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 
+            file:font-semibold ${darkMode ? "file:bg-gray-700 file:text-gray-300 hover:file:bg-gray-600" : "file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"}`}
           />
         </div>
         {file?.name && (
-          <p className="text-gray-600 text-sm mb-4">Loaded File: {file.name}</p>
+          <p className="text-sm mb-4">
+            <strong>Loaded File:</strong> {file.name}
+          </p>
         )}
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4 mb-6">
           <button
             onClick={controllers.pan}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-md">
+            className={`px-4 py-2 rounded-lg shadow-md ${
+              darkMode ? "bg-blue-700 hover:bg-blue-600 text-gray-100" : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}>
             Pan
           </button>
           <button
             onClick={controllers.adjust}
-            className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 shadow-md">
+            className={`px-4 py-2 rounded-lg shadow-md ${
+              darkMode ? "bg-green-700 hover:bg-green-600 text-gray-100" : "bg-green-600 hover:bg-green-700 text-white"
+            }`}>
             Adjust
           </button>
           <button
             onClick={controllers.reset}
-            className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 shadow-md">
+            className={`px-4 py-2 rounded-lg shadow-md ${
+              darkMode ? "bg-red-700 hover:bg-red-600 text-gray-100" : "bg-red-600 hover:bg-red-700 text-white"
+            }`}>
             Reset
           </button>
         </div>
 
         {/* Viewer */}
-        <div className="relative bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+        <div className={`relative rounded-lg overflow-hidden shadow-lg ${darkMode ? "bg-gray-700" : "bg-gray-200"}`}>
           <div className="h-[500px] w-full" ref={viewerRef}>
             <InsightViewer {...viewerProps} />
-             
           </div>
         </div>
+
+        {/* Canva Component */}
+        <Canva file={imageId} theme={
+          (darkMode)?"dark":"light"
+        }/>
       </div>
     </div>
   );
