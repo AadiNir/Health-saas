@@ -1,4 +1,4 @@
-## 🛠️ Tech Stack  
+ ## Tech Stack  
 
 | Tool/Technology       | Purpose                               |
 |------------------------|---------------------------------------|
@@ -22,8 +22,8 @@ To get started, ensure the following are installed on your system:
 
 1. Clone this repository:  
     ```bash
-    git clone https://github.com/username/mailsense.git
-    cd mailsense
+    git clone https://github.com/AadiNir/Health-saas.git
+    cd Health-saas
     ```
 2. Install project dependencies:  
     ```bash
