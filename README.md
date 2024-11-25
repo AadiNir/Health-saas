@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+## 🛠️ Tech Stack  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+| Tool/Technology       | Purpose                               |
+|------------------------|---------------------------------------|
+| **Create React App**   | Setup and configuration of the application. |
+| **TypeScript**         | Enhances code reliability and scalability. |
+| **TailwindCSS**        | Responsive styling for a clean UI.   |
+| **Lunit InsightViewer**| DICOM upload and modification support. |
+| **Docker**             | Containerization for production-ready builds. |
 
-## Available Scripts
+## Getting Started  
 
-In the project directory, you can run:
+### Prerequisites  
 
-### `npm start`
+To get started, ensure the following are installed on your system:  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Node.js** (>= 16.x)  
+- **npm** or **yarn**  
+- **Docker** (>= 20.x)  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Installation  
 
-### `npm test`
+1. Clone this repository:  
+    ```bash
+    git clone https://github.com/username/mailsense.git
+    cd mailsense
+    ```
+2. Install project dependencies:  
+    ```bash
+    npm install
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Start the development server:  
+    ```bash
+    npm run start
+    ```
 
-### `npm run build`
+4. Visit `http://localhost:3000` in your browser to access the application.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🏗️ Building for Production  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Generate a Production Build  
 
-### `npm run eject`
+To build an optimized production version of the application, run:  
+```bash
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+##  Docker Deployment
+### Build the Docker Image
+Use Docker to containerize the application:
+```bash
+docker image build -t my-app:latest 
+```
+### Run the Docker Container
+Start the application in a Docker container:
+```bash
+docker run -dp 8000:3000 --name react-example-container my-app:latest
+```
+### Access the Application
+Once the container is running, open http://localhost:8000 to view the application.
